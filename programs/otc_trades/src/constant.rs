@@ -1,0 +1,6 @@
+pub const MAX_TRANSACTION_TITLE_LENGTH: usize = 200;
+pub const MAX_TRANSACTION_CONTENT_LENGTH: usize = 200;
+pub const MAX_TRANSACTION_LIST_LENGTH: usize = 8;
+
+pub const USER_ACCOUNT_DATA_SEED: String = "abcdef1234567890";
+pub const USER_ACCOUNT_DATA_MAX_SIZE: usize = 2048;
