@@ -1,12 +1,15 @@
 use anchor_lang::prelude::*;
-use crate::accounts::user_account_data::*;
-
-use aead::{
-  Aead,
-  Aes256Gcm,
-  Key,
-  Nonce,
+use crate::{
+    constant::*,
+    states::user_state::UserAccountData,
 };
+
+// use aead::{
+//   Aead,
+//   Aes256Gcm,
+//   Key,
+//   Nonce,
+// };
 
 #[derive(Accounts)]
 pub struct EncryptAES256<'info> {
@@ -18,13 +21,8 @@ pub struct EncryptAES256<'info> {
 }
 
 pub fn handler(ctx: Context<EncryptAES256>, message: String) -> Result<String> {
-  let user_account_data: &mut Account<'_, UserAccountData> = &mut ctx.accounts.user_account_data;
-  let encrypted_message: String = Aes256Gcm.encrypt(message, &user_account_data.nonce.into(), &user_account_data.key.into()).unwrap();
-  Ok(encrypted_message)
-}
-
-pub fn encrypt_object(ctx: Context<EncryptAES256>, message: Object) -> Result<String> {
-  let user_account_data: &mut Account<'_, UserAccountData> = &mut ctx.accounts.user_account_data;
-  let encrypted_message: String = Aes256Gcm.encrypt(message, &user_account_data.nonce.into(), &user_account_data.key.into()).unwrap();
-  Ok(encrypted_message)
+//   let user_account_data: &mut Account<'_, UserAccountData> = &mut ctx.accounts.user_account_data;
+//   let encrypted_message: String = Aes256Gcm.encrypt(message, &user_account_data.nonce.into(), &user_account_data.key.into()).unwrap();
+//   Ok(encrypted_message)
+Ok(message)
 }

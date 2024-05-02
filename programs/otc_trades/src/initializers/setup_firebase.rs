@@ -1,10 +1,16 @@
 use anchor_lang::prelude::*;
-use crate::accounts::user_account_data::*;
 
-use rand::distributions::{Alphanumeric, DistString};
-use rand::Rng;
+use crate::{
+    constant::*,
+    states::user_state::UserAccountData,
+    states::user_state::FirebaseCredentials
+};
+
+// use rand::distributions::{Alphanumeric, DistString};
+// use rand::Rng;
 
 // Define a distribution for special characters
+/* 
 struct StandardSpecial;
 
 impl DistString for StandardSpecial {
@@ -38,8 +44,10 @@ impl DistString for Digits {
     }
 }
 
+*/
+
 #[derive(Accounts)]
-pub struct SetupCredentials<'info> {
+pub struct SetupFirebase<'info> {
     #[account(init, payer = payer, space = 8 + USER_ACCOUNT_DATA_MAX_SIZE)]
     pub user_account_data: Account<'info, UserAccountData>,
     #[account(mut)]
@@ -47,30 +55,34 @@ pub struct SetupCredentials<'info> {
     pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<SetupCredentials>) -> Result<FirebaseCredentials> {
+pub fn handler(ctx: Context<SetupFirebase>) -> Result<FirebaseCredentials> {
     let user_account_data = &mut ctx.accounts.user_account_data;
+    /* 
     let mut rng = rand::thread_rng();
     let username = format!(
-        "fbusr_{}",
+        "fb_{}",
         Alphanumeric.new().sample_string(&mut rng, 8).to_lowercase()
     );
     let password = format!(
-        "@{}{}{}{}{}{}",
+        "@{}{}{}{}{}{}{}{}",
         rng.sample(Alphanumeric),
+        rng.sample(StandardSpecial),
+        rng.sample(Digits),
+        rng.sample(StandardSpecial),
+        rng.sample(Digits),
         rng.sample(Alphanumeric).to_uppercase(),
-        rng.sample(StandardSpecial),
-        rng.sample(StandardSpecial),
-        rng.sample(StandardSpecial),
         rng.sample(Digits),
-        rng.sample(Digits),
-        rng.sample(Digits)
+        rng.sample(StandardSpecial)
     );
     let credentials = FirebaseCredentials { username, password };
     user_account_data.credentials = credentials;
     Ok(credentials)
+    */
+    Ok(FirebaseCredentials{username:"USERNAME".to_string(), password: "PASSWORD".to_string()})
 }
 
-pub fn get_firebase_credentials(ctx: Context<SetupAES256>) -> Result<(FirebaseCredentials)> {
-    let user_account_data = &mut ctx.accounts.user_account_data;
-    Ok(&user_account_data.credentials)
+pub fn get_firebase_credentials(ctx: Context<SetupFirebase>) -> Result<FirebaseCredentials> {
+    // let user_account_data = &mut ctx.accounts.user_account_data;
+    // Ok(&user_account_data.credentials)
+    Ok(FirebaseCredentials{username:"USERNAME".to_string(), password: "PASSWORD".to_string()})
 }

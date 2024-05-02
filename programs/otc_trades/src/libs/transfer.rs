@@ -11,7 +11,7 @@ pub struct TransferLamports<'info> {
     pub system_program: Program<'info, System>,
 }
 
-pub fn transfer_lamports(ctx: Context<TransferLamports>, amount: u64) -> Result<()> {
+pub fn lamports(ctx: Context<TransferLamports>, amount: u64) -> Result<()> {
     let from_account = &ctx.accounts.from;
     let to_account = &ctx.accounts.to;
 
@@ -43,7 +43,7 @@ pub struct TransferSpl<'info> {
     pub token_program: Program<'info, Token>,
 }
 
-pub fn transfer_spl_tokens(ctx: Context<TransferSpl>, amount: u64) -> Result<()> {
+pub fn spl_tokens(ctx: Context<TransferSpl>, amount: u64) -> Result<()> {
     let destination = &ctx.accounts.to_ata;
     let source = &ctx.accounts.from_ata;
     let token_program = &ctx.accounts.token_program;

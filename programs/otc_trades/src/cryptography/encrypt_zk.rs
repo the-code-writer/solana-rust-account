@@ -1,8 +1,12 @@
 use anchor_lang::prelude::*;
-use crate::accounts::user_account_data::*;
 
-use rand::Rng;
-use zk_snark_rs::{Curve, Point, Encryption};
+use crate::{
+    constant::*,
+    states::user_state::UserAccountData,
+};
+
+// use rand::Rng;
+// use zk_snark_rs::{Curve, Point, Encryption};
 
 #[derive(Accounts)]
 pub struct EncryptZKSnark<'info> {
@@ -14,11 +18,12 @@ pub struct EncryptZKSnark<'info> {
 }
 
 pub fn handler(ctx: Context<EncryptZKSnark>, message: String) -> Result<String> {
-  let user_account_data: &mut Account<'_, UserAccountData> = &mut ctx.accounts.user_account_data;
-  let encrypted_message: String = Encryption::encrypt(
-    message.as_bytes(),
-    &user_account_data.public_key,
-    &user_account_data.private_key,
-  )
-  Ok(encrypted_message)
+  // let user_account_data: &mut Account<'_, UserAccountData> = &mut ctx.accounts.user_account_data;
+  // let encrypted_message: String = Encryption::encrypt(
+  //   message.as_bytes(),
+  //   &user_account_data.public_key,
+  //   &user_account_data.private_key,
+  // );
+  // Ok(encrypted_message)
+  Ok(message)
 }

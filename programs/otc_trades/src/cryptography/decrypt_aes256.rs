@@ -1,10 +1,13 @@
 use anchor_lang::prelude::*;
-use crate::accounts::user_account_data_data::*;
+use crate::{
+    constant::*,
+    states::user_state::UserAccountData,
+};
 
-use aead::{
-    Aead,
-    Aes256Gcm
-  };
+// use aead::{
+//     Aead,
+//     Aes256Gcm
+//   };
 
 #[derive(Accounts)]
 pub struct DecryptAES256<'info> {
@@ -16,8 +19,9 @@ pub struct DecryptAES256<'info> {
 }
 
 pub fn handler(ctx: Context<DecryptAES256>, message: String) -> Result<String> {
-    let user_account_data: &Account<'_, UserAccountData> = &ctx.accounts.user_account_data;
-    let cipher = Aes256Gcm::new(&user_account_data.key.into());
-    let decrypted_message: Vec<u8> = cipher.decrypt(&user_account_data.nonce.into(), message).unwrap();
-    Ok(String::from_utf8(decrypted_message).unwrap())
+    // let user_account_data: &Account<'_, UserAccountData> = &ctx.accounts.user_account_data;
+    // let cipher = Aes256Gcm::new(&user_account_data.key.into());
+    // let decrypted_message: Vec<u8> = cipher.decrypt(&user_account_data.nonce.into(), message).unwrap();
+    // Ok(String::from_utf8(decrypted_message).unwrap())
+    Ok(message)
 }
