@@ -1,4 +1,4 @@
-# Handshake
+# Solana Bank
 
 For more, see the [examples](https://github.com/handshake-io/otc-trades/tree/master/examples)
 and [tests](https://github.com/handshake-io/otc-trades/tree/master/tests) directories.
